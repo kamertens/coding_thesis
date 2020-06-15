@@ -289,7 +289,7 @@ for autocorrelation in list_h:
                 meta.a_day_in_the_life()
                 print(timer)
                 print(len(meta.population))
-                # add rows to existing csv file
+                
                 if timer == generations - 1:
                     if meta.pop_size[-1] > 100:
                         sample_pop = []
