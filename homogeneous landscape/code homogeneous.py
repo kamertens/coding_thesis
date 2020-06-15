@@ -248,7 +248,15 @@ start_population = 10000
 step_min, step_max = 0, 10
 div_min, div_max = 0, math.pi
 
+with open("random walk.csv", "w") as csvfile:
+    writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(['mass (kg)', 'dimensions', 'autocorrelation', 'suitable habitat', 'run', 'step mean', 'mean divergence',
+                     'population size', 'mean resources', 'mean regrowth', 'mean x'])
 
+with open(f'runs random walk (p = {list_p[-1]}).csv', "w") as csvfile:
+    writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    writer.writerow(['mass (kg)', 'dimensions', 'autocorrelation', 'suitable habitat', 'run', 'ind', 'step length',
+                     'divergence', 'x-position'])
 for autocorrelation in list_h:
     for suitable_habitat in list_p:
 
@@ -289,13 +297,13 @@ for autocorrelation in list_h:
                     ind_nr = 1
                     for i in sample_pop:
 
-                        with open(f'sensitivity analysis landscape runs random walk 2 (p = {list_p[-1]}).csv', 'a', newline='') as ind:
+                        with open(f'runs random walk (p = {list_p[-1]}).csv', 'a', newline='') as ind:
                             iwriter = csv.writer(ind)
                             iwriter.writerow([f'{mass}', f'{max_x} x {max_y}', f'{autocorrelation}', f'{suitable_habitat}', f'{simulation}',
                                               f'{ind_nr}', f'{i.step_mean}', f'{i.diversion}', f'{i.x}'])
                         ind_nr += 1
 
-            with open("sensitivity analysis landscape random walk.csv", 'a', newline='') as f:
+            with open("random walk.csv", 'a', newline='') as f:
                 fwriter = csv.writer(f)
                 fwriter.writerow([f'{mass}', f'{max_x} x {max_y}', f'{autocorrelation}', f'{suitable_habitat}',
                                   f'{simulation}', f'{meta.mean_step[-1]}', f'{meta.mean_diversion[-1]}',
